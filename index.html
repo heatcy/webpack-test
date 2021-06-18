@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>webpack project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            height: 100%;
+        }
+        
+        ul,
+        li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .level {
+            position: absolute;
+            bottom: 50px;
+            left: 20%;
+            z-index: 100;
+        }
+        
+        .value,
+        .color {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .value {
+            justify-content: start;
+        }
+        
+        .num {
+            margin: 0 7.5px;
+        }
+        
+        .num:nth-child(7),
+        .num:nth-child(8) {
+            margin: 0 13px;
+        }
+        
+        .num:nth-child(9),
+        .num:nth-child(10),
+        .num:nth-child(11) {
+            margin: 0 16px;
+        }
+        
+        .colItem {
+            width: 40px;
+            height: 30px;
+            background-color: aqua;
+            border: 1px solid #000;
+            border-right: none;
+        }
+        
+        .colItem:nth-last-child(2) {
+            border-right: 1px solid #000;
+        }
+        
+        .colItem:last-child {
+            background: none;
+            border: none;
+            width: auto;
+            margin-left: 5px;
+            line-height: 2;
+            position: absolute;
+            right: -55px;
+            top: 40%;
+        }
+        
+        #container {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    <div class="level">
+        <ul class="value">
+            <li class="num">-50</li>
+            <li class="num">-28</li>
+            <li class="num">-24</li>
+            <li class="num">-20</li>
+            <li class="num">-16</li>
+            <li class="num">-12</li>
+            <li class="num">-8</li>
+            <li class="num">-4</li>
+            <li class="num">0</li>
+            <li class="num">4</li>
+            <li class="num">8</li>
+        </ul>
+        <ul class="color">
+            <li class="colItem" style="background-color:#6362f5 ;"></li>
+            <li class="colItem" style="background-color:#6688f9 ;"></li>
+            <li class="colItem" style="background-color:#63b3f9 ;"></li>
+            <li class="colItem" style="background-color:#63d8f9 ;"></li>
+            <li class="colItem" style="background-color:#63fbf9 ;"></li>
+            <li class="colItem" style="background-color: #65fcd1;"></li>
+            <li class="colItem" style="background-color:#62faa8 ;"></li>
+            <li class="colItem" style="background-color:#6ef58a ;"></li>
+            <li class="colItem" style="background-color:#73f762 ;"></li>
+            <li class="colItem" style="background-color:#91fa61 ;"></li>
+            <li class="colItem" style="background-color: #bcfa61;"></li>
+            <li class="colItem" style="background-color: #e2fa61;"></li>
+        </ul>
+        <span class="colItem">单位:℃</span>
+    </div>
+    <div id="container"></div>
+    <script src="dist/bundle.js"></script>
+    <!--这是打包之后的js文件，我们暂时命名为bundle.js-->
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=d42ed4f7426fc2a1a682ca2de3c73fc8"></script>
+    <script src="//a.amap.com/jsapi_demos/static/resource/heatmapData.js"></script>
+
+</body>
+
+</html>
