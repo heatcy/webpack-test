@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
-    "dev": "webpack-dev-server --hot --inline --open"
+    "dev": "webpack serve  --inline --open --config webpack.config.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,14 +16,11 @@
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^3.0.0",
     "css-minimizer-webpack-plugin": "^3.0.1",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "glob": "^7.1.7",
     "html-webpack-plugin": "^5.3.1",
     "less-loader": "^10.0.0",
     "mini-css-extract-plugin": "^1.6.0",
     "postcss-loader": "^6.1.0",
-    "purify-css": "^1.2.5",
-    "purifycss-webpack": "^0.7.0",
     "sass-loader": "^12.1.0",
     "speed-measure-webpack-plugin": "^1.5.0",
     "thread-loader": "^3.0.4",
