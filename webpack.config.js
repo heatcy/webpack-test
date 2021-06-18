@@ -1,31 +1,29 @@
-const path = require('path') //处理绝对路径
-const webpack = require('webpack')
-    //自动生成html文件
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-    //清理dist文件
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-    //引入分离文件,主要是为了抽离 css 样式,防止将样式打包在 js 中引起页面样式加载错乱的现象
-    //const ExtractTextPlugin = require('extract-text-webpack-plugin')
-    //消除冗余css
-const PurifyCssWebpack = require('purifycss-webpack')
-    //分离css文件
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-    //压缩css文件  webpack内置的压缩插件，仅仅支持JS文件的压缩
+const path = require("path"); //处理绝对路径
+const webpack = require("webpack");
+//自动生成html文件
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+//清理dist文件
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+//引入分离文件,主要是为了抽离 css 样式,防止将样式打包在 js 中引起页面样式加载错乱的现象
+//const ExtractTextPlugin = require('extract-text-webpack-plugin')
+//分离css文件
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+//压缩css文件  webpack内置的压缩插件，仅仅支持JS文件的压缩
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 // const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 // 引入glob模块,用于扫描全部html文件中所引用的css
-const glob = require('glob')
-    //测试webpack构建各阶段花费时间
-const speedMeasurePlugin = require('speed-measure-webpack-plugin')
-const smp = new speedMeasurePlugin()
-    //分析包内容
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const glob = require("glob");
+//测试webpack构建各阶段花费时间 暂不支持webpack5
+// const speedMeasurePlugin = require('speed-measure-webpack-plugin')
+// const smp = new speedMeasurePlugin()
+//分析包内容
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const devMode = process.env.NODE_ENV !== "production";
 
 let webpackConfig = {
-  //   mode: "development", //production
+  mode: devMode?"development":"production",
   entry: path.join(__dirname, "/index.js"), //入口文件
   output: {
     path: path.join(__dirname, "/dist"), //打包后文件存放的位置
@@ -36,6 +34,7 @@ let webpackConfig = {
   devServer: {
     contentBase: "./dist", //本地服务器所加载的文件的目录
     port: "8080", //端口号
+    compress: true, // 静态文件开启gzip压缩
     inline: true, //文件修改后实时刷新
     historyApiFallback: false, //不跳转,
     hot: true, //热更新
@@ -93,7 +92,7 @@ let webpackConfig = {
   },
   plugins: [
     //开启BundleAnalyzerPlugin
-    //new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: "index.html",
@@ -112,9 +111,6 @@ let webpackConfig = {
       filename: "css/[name].css",
     }),
     //new ExtractTextPlugin('css/idnex.css'), //将css分离到/dist下的css文件夹中的index.css
-    new PurifyCssWebpack({
-      paths: glob.sync(path.join(__dirname, "*.html")), //同步扫描所有html文件中引入的css
-    }),
   ],
   optimization: {
     concatenateModules: false,
@@ -141,4 +137,5 @@ let webpackConfig = {
   },
 };
 
-module.exports = smp.wrap(webpackConfig)
+// module.exports = smp.wrap(webpackConfig)
+module.exports = webpackConfig;
